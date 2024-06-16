@@ -1,0 +1,35 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+
+    - name: Create classes directory
+      run: mkdir -p classes
+
+    - name: Compile Java
+      run: |
+        find "Source Packages" -name "*.java" > sources.txt
+        javac -d classes @sources.txt
+
+    - name: Run Java Application
+      run: |
+        java -cp classes BakeryManagement
