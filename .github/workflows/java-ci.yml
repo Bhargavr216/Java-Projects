@@ -27,9 +27,9 @@ jobs:
 
     - name: Compile Java
       run: |
-        find src/BakeryManagement -name "*.java" > sources.txt
+        find src -name "*.java" > sources.txt
         javac -d classes @sources.txt
 
     - name: Run Java Application
       run: |
-        java -cp classes BakeryManagement.BakeryManagement
+        java -cp classes BakeryManagement
